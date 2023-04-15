@@ -2,7 +2,7 @@
 #include <stdio.h>
 /**
 * main - causes an infinite loop
-* Return: 0
+* Return: 0 (Success)
 Author: Brian Ngugi
 */
 int main(void)
