@@ -1,32 +1,37 @@
-#ifndef _LISTS_
-#define _LISTS_
-
-#include <stdio.h>
-#include <stdlib.h>
+#include "lists.h"
 
 /**
- * struct dlistint_s - doubly linked list
- * @n: integer
- * @prev: points to the previous node
- * @next: points to the next node
- * Description: doubly linked list node structure
- * for Holberton project
+ * add_dnodeint - adds a new node at the beginning
+ * of a dlistint_t list
+ * @head: head of the list
+ * @n: value of the element
+ * Return: the address of the new element
  */
-typedef struct dlistint_s
+dlistint_t *add_dnodeint(dlistint_t **head, const int n)
 {
-	int n;
-	struct dlistint_s *prev;
-	struct dlistint_s *next;
-} dlistint_t;
+	dlistint_t *new;
+	dlistint_t *h;
 
-size_t print_dlistint(const dlistint_t *h);
-size_t dlistint_len(const dlistint_t *h);
-dlistint_t *add_dnodeint(dlistint_t **head, const int n);
-dlistint_t *add_dnodeint_end(dlistint_t **head, const int n);
-void free_dlistint(dlistint_t *head);
-dlistint_t *get_dnodeint_at_index(dlistint_t *head, unsigned int index);
-int sum_dlistint(dlistint_t *head);
-dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n);
-int delete_dnodeint_at_index(dlistint_t **head, unsigned int index);
+	new = malloc(sizeof(dlistint_t));
+	if (new == NULL)
+		return (NULL);
 
-#endif
+	new->n = n;
+	new->prev = NULL;
+	h = *head;
+
+	if (h != NULL)
+	{
+		while (h->prev != NULL)
+			h = h->prev;
+	}
+
+	new->next = h;
+
+	if (h != NULL)
+		h->prev = new;
+
+	*head = new;
+
+	return (new);
+}
